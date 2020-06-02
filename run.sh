@@ -1,4 +1,4 @@
-!/usr/bin/env bash
+#!/usr/bin/env bash
 
 # skale-dev-env
 
@@ -138,7 +138,7 @@ Usage:
   ${_ME} OPTIONS
   ${_ME} -? | --help
 
-OPTTIONS:
+OPTIONS:
 
   --host -h  Local address to bind to (default: 0.0.0.0)
   --http-port  HTTP port to listen at (default: 1234 or use -1 to disable)
