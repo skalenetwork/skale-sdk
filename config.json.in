@@ -66,9 +66,8 @@
       "basePort": 1231,
       "logLevel": "debug",
       "logLevelProposal": "trace",
-      "emptyBlockIntervalMs": 3000,
       "snapshotInterval": 0,
-      "rotateAfterBlock": 64
+      "rotateAfterBlock": 0
     },
     "sChain":
       {
@@ -76,6 +75,7 @@
         "schainID": 1,
         "schainOwner": "0x6d80aAC61F6d92c7F4A3c412850474ba963B698E",
         "storageLimit": 999888777,
+        "emptyBlockIntervalMs": 3000,
         "nodes": [
           { "nodeID": 1112, "ip": "127.0.0.1", "basePort": 1231, "schainIndex" : 1}
         ]

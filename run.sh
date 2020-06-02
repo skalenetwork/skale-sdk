@@ -1,8 +1,4 @@
-#!/usr/bin/env bash
-
-# "kidney describe moon museum join brave birth detect harsh little hockey turn"
-# 0x6d80aAC61F6d92c7F4A3c412850474ba963B698E
-# 0x16db936de7342b075849d74a66460007772fab88cf4ab509a3487f23398823d6
+!/usr/bin/env bash
 
 # skale-dev-env
 
@@ -144,14 +140,21 @@ Usage:
 
 OPTTIONS:
 
-  -h --host  Local address to bind to (default: 0.0.0.0)
+  --host -h  Local address to bind to (default: 0.0.0.0)
   --http-port  HTTP port to listen at (default: 1234 or use -1 to disable)
   --ws-port  WebSocket port to listen at (default: 1233 or use -1 to disable)
-  -p --port  Same as --http-port
+  --port -p  Same as --http-port
   
   -e --defaultBalanceEther  Amount of Ether to generate on schain owner's address (default: 100)
-  -b --emptyBlockIntervalMs Interval of empty blocks generation, ms (default: 3000 or use -1 to disable)
+  -b --blockTime Interval of empty blocks generation (default: 3 sec or use -1 to disable)
   -? --help  Display this help information.
+
+For transactions use the following account:
+
+  Seed phrase: kidney describe moon museum join brave birth detect harsh little hockey turn
+  Address: 0x6d80aAC61F6d92c7F4A3c412850474ba963B698E
+  Private key: 0x16db936de7342b075849d74a66460007772fab88cf4ab509a3487f23398823d6
+
 HEREDOC
 }
 
@@ -168,9 +171,9 @@ fi
 # Initialize additional expected option variables.
 _HOST="0.0.0.0"
 _HTTP_PORT="1234"
-_WS_PORT=""
+_WS_PORT="1233"
 _DEFAULT_BALANCE_ETHER="100"
-_EMPTY_BLOCK_INTERVAL_MS="3000"
+_BLOCK_TIME="3"
 
 
 # _require_argument()
@@ -184,9 +187,20 @@ _require_argument() {
   local _option="${1:-}"
   local _argument="${2:-}"
 
-  if [[ -z "${_argument}" ]] || [[ "${_argument}" =~ ^- ]]
+  if [[ -z "${_argument}" ]] || [[ "${_argument}" =~ ^-.*[^0-9] ]]
   then
     _die printf "Option requires an argument: %s\\n" "${_option}"
+  fi
+}
+
+_require_argument_int() {
+  local _option="${1:-}"
+  local _argument="${2:-}"
+  _require_argument $_option $_argument
+
+  if [[ ! "${_argument}" =~ ^[+-]?[0-9]+$ ]]
+  then
+    _die printf "%s requires integer argument, got: %s\\n" "${_option}" "${_argument}"
   fi
 }
 
@@ -195,7 +209,7 @@ do
   __option="${1:-}"
   __maybe_param="${2:-}"
   case "${__option}" in
-    -?|--help)
+    -\?|--help)
       _PRINT_HELP=1
       ;;
   -h|--host)
@@ -204,23 +218,23 @@ do
     shift
     ;;
   -p|--port|--http-port)
-    _require_argument "${__option}" "${__maybe_param}"
+    _require_argument_int "${__option}" "${__maybe_param}"
     _HTTP_PORT="${__maybe_param}"
     shift
     ;;
   --ws-port)
-    _require_argument "${__option}" "${__maybe_param}"
+    _require_argument_int "${__option}" "${__maybe_param}"
     _WS_PORT="${__maybe_param}"
     shift
     ;;
   -e|--defaultBalanceEther)
-    _require_argument "${__option}" "${__maybe_param}"
+    _require_argument_int "${__option}" "${__maybe_param}"
     _DEFAULT_BALANCE_ETHER="${__maybe_param}"
     shift
     ;;
-  -b|--emptyBlockIntervalMs)
-    _require_argument "${__option}" "${__maybe_param}"
-    _EMPTY_BLOCK_INTERVAL_MS="${__maybe_param}"
+  -b|--blockTime)
+    _require_argument_int "${__option}" "${__maybe_param}"
+    _BLOCK_TIME="${__maybe_param}"
     shift
     ;;
   -*)
@@ -238,35 +252,37 @@ _json_replace(){
   local _what="$1"
   local _to="$2"
   local _where="$3"
-  sed -i 's/"${_what}[^,]*/"${_what}": {$_to}/g' ${_where}
+  sed -i "s/${_what}[^,}]*/${_what}\": ${_to}/g" ${_where}
 }
 
 _print_params() {
 
   if [[ -n "${_HOST}" ]]
   then
-    printf "_HOST=%s\n" "${_HOST}"
+    printf " --host=%s\n" "${_HOST}"
   fi
 
   if [[ -n "${_HTTP_PORT}" ]]
   then
-    printf "_HTTP_PORT=%s\n" "${_HTTP_PORT}"
+    printf " --http-port=%s\n" "${_HTTP_PORT}"
   fi
   
   if [[ -n "${_WS_PORT}" ]]
   then
-    printf "_WS_PORT=%s\n" "${_WS_PORT}"
+    printf " --ws-port=%s\n" "${_WS_PORT}"
   fi
   
   if [[ -n "${_DEFAULT_BALANCE_ETHER}" ]]
   then
-    printf "_DEFAULT_BALANCE_ETHER=%s\n" "${_DEFAULT_BALANCE_ETHER}"
+    printf " --defaultBalanceEther=%s\n" "${_DEFAULT_BALANCE_ETHER}"
   fi
   
-  if [[ -n "${_EMPTY_BLOCK_INTERVAL_MS}" ]]
+  if [[ -n "${_BLOCK_TIME}" ]]
   then
-    printf "_EMPTY_BLOCK_INTERVAL_MS=%s\n" "${_EMPTY_BLOCK_INTERVAL_MS}"
+    printf " --blockTime=%s\n" "${_BLOCK_TIME}"
   fi
+  
+  printf "\n"
 
 }
 
@@ -282,14 +298,46 @@ _main() {
 
   _print_params
 
-  mkdir ${_DATA_DIR} || true
+  cp config.json.in config.json
+  _json_replace emptyBlockIntervalMs "$((${_BLOCK_TIME}*1000))" config.json
+  _json_replace '698E": {"balance' "\"${_DEFAULT_BALANCE_ETHER}000000000000000000\"" config.json
 
-  cp config.json.in ${_DATA_DIR}/config.json
-  _json_replace emptyBlockIntervalMs -1 ${_DATA_DIR}/config.json
+  if [[ -d "${_DATA_DIR}" ]]
+  then
+    printf "Found data_dir ${_DATA_DIR}\n"
+    if ! diff "${_DATA_DIR}/config.json" config.json
+    then
+      printf "Re-creating blockchain in data_dir because of above config.json changes\n"
+      rm -rf ${_DATA_DIR}/*
+    else
+      printf "Re-using existing blockchain\n"
+    fi
+  else
+    mkdir "${_DATA_DIR}"
+    printf "Creating data_dir ${_DATA_DIR}\n"
+  fi
+  
+  mv config.json "${_DATA_DIR}/config.json"
+
+  local _args_arr=""
+  if [[ "${_HTTP_PORT}" -gt  0 ]]
+  then
+    _args_arr="${_args_arr}	-p	${_HOST}:${_HTTP_PORT}:1234/tcp"
+    _args_arr="${_args_arr}	-e	HTTP_RPC_PORT=1234"
+  else
+    _args_arr="${_args_arr}	-e	HTTP_RPC_PORT=--"
+  fi
+  if [[ "${_WS_PORT}" -gt 0 ]]
+  then
+    _args_arr="${_args_arr}	-p	${_HOST}:${_WS_PORT}:1233/tcp"
+    _args_arr="${_args_arr}	-e	WS_RPC_PORT=1233"
+  else
+    _args_arr="${_args_arr}	-e	WS_RPC_PORT=--"
+  fi
 
   docker pull ${_SKALED_IMAGE}
 
-  docker run -v `pwd`/${_DATA_DIR}:/data_dir -p ${_HOST}:${_HTTP_PORT}:1234/tcp -p ${_HOST}:${_WS_PORT}:1233/tcp -e CONFIG_FILE=/data_dir/config.json -e DATA_DIR=/data_dir -e HTTP_RPC_PORT=1234 -e HTTPS_RPC_PORT=-- -e WS_RPC_PORT=1233 -e WSS_RPC_PORT=-- -e SSL_KEY_PATH=-- -e SSL_CERT_PATH=-- ${_SKALED_IMAGE}
+  docker run -v `pwd`/${_DATA_DIR}:/data_dir ${_args_arr} -e CONFIG_FILE=/data_dir/config.json -e DATA_DIR=/data_dir -e HTTPS_RPC_PORT=-- -e WSS_RPC_PORT=-- -e SSL_KEY_PATH=-- -e SSL_CERT_PATH=-- --stop-timeout 40 -i -t ${_SKALED_IMAGE}
 
 }
 
