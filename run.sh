@@ -154,6 +154,8 @@ For transactions use the following account:
   Seed phrase: kidney describe moon museum join brave birth detect harsh little hockey turn
   Address: 0x6d80aAC61F6d92c7F4A3c412850474ba963B698E
   Private key: 0x16db936de7342b075849d74a66460007772fab88cf4ab509a3487f23398823d6
+  
+  Use chainId=0x54A7E
 
 HEREDOC
 }
