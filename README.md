@@ -11,11 +11,16 @@ On Ubuntu 19.10
 ```
 sudo apt install docker.io
 ```
+Optionally (in case of troubles):
+```
+sudo service docker start
+docker logout
+```
 
 ## How to run
 
 1. Run daemon: `./run.sh`
-2. Use either of the folloging as andpoint:
+2. Use either of the folloging as endpoint:
    * `http://127.0.0.1:1234`
    * `ws://127.0.0.1:1233`
 3. Use your wallet with the following credentials:
