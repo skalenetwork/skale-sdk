@@ -9,6 +9,7 @@ skale-dev-env is a collection of tools for setting up local development environm
 ## Dependencies
 On Ubuntu 19.10
 ```
+sudo apt-get update
 sudo apt install docker.io
 ```
 Optionally (in case of troubles):
