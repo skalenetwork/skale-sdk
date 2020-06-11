@@ -13,7 +13,7 @@
 ###############################################################################
 
 _USE_DEBUG=0
-_SKALED_IMAGE="skalenetwork/schain:develop-latest"
+_SKALED_IMAGE="skalenetwork/schain:1.46-develop.17"
 _DATA_DIR="./data_dir"
 
 ###############################################################################
@@ -340,10 +340,11 @@ _main() {
   fi
 
   _options="${_options} --config /data_dir/config.json -d /data_dir"
+  _options="${_options} --ipcpath /data_dir -v 3 --web3-trace --enable-debug-behavior-apis --aa no"
 
   docker pull ${_SKALED_IMAGE}
 
-  docker run -v `pwd`/${_DATA_DIR}:/data_dir ${_args_arr} -e OPTIONS="${_options}" --stop-timeout 40 -i -t ${_SKALED_IMAGE}
+  docker run -v `pwd`/${_DATA_DIR}:/data_dir ${_args_arr} -e DATA_DIR=/data_dir -e OPTIONS="${_options}" --stop-timeout 40 -i -t ${_SKALED_IMAGE}
 
 }
 
