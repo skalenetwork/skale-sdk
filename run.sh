@@ -219,7 +219,12 @@ do
     _HOST="${__maybe_param}"
     shift
     ;;
-  -p|--port|--http-port)
+  -p|--port)
+    _require_argument_int "${__option}" "${__maybe_param}"
+    _HTTP_PORT="${__maybe_param}"
+    shift
+    ;;
+  --http-port)
     _require_argument_int "${__option}" "${__maybe_param}"
     _HTTP_PORT="${__maybe_param}"
     shift
