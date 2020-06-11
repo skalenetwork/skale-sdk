@@ -323,28 +323,27 @@ _main() {
     mkdir "${_DATA_DIR}"
     printf "Creating data_dir ${_DATA_DIR}\n"
   fi
-  
+
   mv config.json "${_DATA_DIR}/config.json"
 
   local _args_arr=""
+  local _options=""
   if [[ "${_HTTP_PORT}" -gt  0 ]]
   then
     _args_arr="${_args_arr}	-p	${_HOST}:${_HTTP_PORT}:1234/tcp"
-    _args_arr="${_args_arr}	-e	HTTP_RPC_PORT=1234"
-  else
-    _args_arr="${_args_arr}	-e	HTTP_RPC_PORT=--"
+    _options="${_options} --http-port 1234"
   fi
   if [[ "${_WS_PORT}" -gt 0 ]]
   then
     _args_arr="${_args_arr}	-p	${_HOST}:${_WS_PORT}:1233/tcp"
-    _args_arr="${_args_arr}	-e	WS_RPC_PORT=1233"
-  else
-    _args_arr="${_args_arr}	-e	WS_RPC_PORT=--"
+    _options="${_options} --ws-port 1233"
   fi
+
+  _options="${_options} --config /data_dir/config.json -d /data_dir"
 
   docker pull ${_SKALED_IMAGE}
 
-  docker run -v `pwd`/${_DATA_DIR}:/data_dir ${_args_arr} -e CONFIG_FILE=/data_dir/config.json -e DATA_DIR=/data_dir -e HTTPS_RPC_PORT=-- -e WSS_RPC_PORT=-- -e SSL_KEY_PATH=-- -e SSL_CERT_PATH=-- --stop-timeout 40 -i -t ${_SKALED_IMAGE}
+  docker run -v `pwd`/${_DATA_DIR}:/data_dir ${_args_arr} -e OPTIONS="${_options}" --stop-timeout 40 -i -t ${_SKALED_IMAGE}
 
 }
 
