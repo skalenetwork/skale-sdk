@@ -9,7 +9,7 @@
     "byzantiumForkBlock": "0x0",
     "constantinopleForkBlock": "0x0",
     "networkID": "12313219",
-    "chainID": "0x54A7E",
+    "chainID": "0xd39d",
     "maximumExtraDataSize": "0x20",
     "tieBreakingGas": false,
     "minGasLimit": "0xFFFFFFF",

@@ -1,6 +1,6 @@
 [submodule "skaled-blockchain-explorer"]
 	path = skaled-blockchain-explorer
-	url = git@github.com:skalenetwork/skaled-blockchain-explorer
+	url = https://github.com/skalenetwork/skaled-blockchain-explorer
 [submodule "skaled-stats-viewer"]
 	path = skaled-stats-viewer
-	url = git@github.com:skalenetwork/skaled-stats-viewer
+	url = https://github.com/skalenetwork/skaled-stats-viewer

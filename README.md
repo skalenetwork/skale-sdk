@@ -24,7 +24,7 @@ docker logout
 2. Use either of the folloging as endpoint:
    * `http://127.0.0.1:1234`
    * `ws://127.0.0.1:1233`
-3. Set `chainID=0x54A7E`
+3. Set `chainID=54173`
 4. Use your wallet with the following credentials:
 ```
   Seed phrase: kidney describe moon museum join brave birth detect harsh little hockey turn
