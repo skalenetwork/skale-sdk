@@ -1,5 +1,5 @@
 # skale-dev-env
-skale-dev-env is a collection of tools for setting up local development environment for SKALE network.
+skale-dev-env is a collection of tools for setting up local development environment for SKALE chain development.
 
 ## Package contents
  1. single-node containerized version of `skaled` deamon;
