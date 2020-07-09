@@ -18,6 +18,8 @@ sudo service docker start
 docker logout
 ```
 
+On Mac, be sure to install docker.
+
 ## How to run
 
 1. Run daemon: `./run.sh`
