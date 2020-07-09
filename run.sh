@@ -259,7 +259,7 @@ _json_replace(){
   local _what="$1"
   local _to="$2"
   local _where="$3"
-  sed -i "s/${_what}[^,}]*/${_what}\": ${_to}/g" ${_where}
+  sed -i '' -e "s/${_what}[^,}]*/${_what}\": ${_to}/g" ${_where}
 }
 
 _print_params() {
