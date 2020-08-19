@@ -13,7 +13,7 @@
 ###############################################################################
 
 _USE_DEBUG=0
-_SKALED_IMAGE="skalenetwork/schain:1.46-develop.27"
+_SKALED_IMAGE="skalenetwork/schain:1.46-develop.51"
 _DATA_DIR="./data_dir"
 
 ###############################################################################
@@ -335,20 +335,20 @@ _main() {
   if [[ "${_HTTP_PORT}" -gt  0 ]]
   then
     _args_arr="${_args_arr}	-p	${_HOST}:${_HTTP_PORT}:1234/tcp"
-    _options="${_options} --http-port 1234"
+    _options="${_options}	--http-port	1234"
   fi
   if [[ "${_WS_PORT}" -gt 0 ]]
   then
     _args_arr="${_args_arr}	-p	${_HOST}:${_WS_PORT}:1233/tcp"
-    _options="${_options} --ws-port 1233"
+    _options="${_options}	--ws-port	1233"
   fi
 
-  _options="${_options} --config /data_dir/config.json -d /data_dir"
-  _options="${_options} --ipcpath /data_dir -v 3 --web3-trace --enable-debug-behavior-apis --aa no"
+  _options="${_options}	--config	/data_dir/config.json	-d	/data_dir"
+  _options="${_options}	--ipcpath	/data_dir	-v	3	--web3-trace	--enable-debug-behavior-apis	--aa	no"
 
   docker pull ${_SKALED_IMAGE}
 
-  docker run -v `pwd`/${_DATA_DIR}:/data_dir ${_args_arr} -e DATA_DIR=/data_dir -e OPTIONS="${_options}" --stop-timeout 40 -i -t ${_SKALED_IMAGE}
+  docker run -v `pwd`/${_DATA_DIR}:/data_dir ${_args_arr} -e DATA_DIR=/data_dir --stop-timeout 40 -i -t ${_SKALED_IMAGE} ${_options}
 
 }
 
