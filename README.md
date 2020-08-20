@@ -27,12 +27,14 @@ On Mac, be sure to install docker.
    * `http://127.0.0.1:1234`
    * `ws://127.0.0.1:1233`
 3. Set `chainID=54173`
-4. Use your wallet with the following credentials:
+4. Use your wallet with the following test credentials:
 ```
   Seed phrase: kidney describe moon museum join brave birth detect harsh little hockey turn
   Address: 0x6d80aAC61F6d92c7F4A3c412850474ba963B698E
   Private key: 0x16db936de7342b075849d74a66460007772fab88cf4ab509a3487f23398823d6
 ```
+
+Important: Only the SKALE Chain owner (`0x6d80a...`) can deploy contracts. To allow any address to deploy, append `"freeContractDeployment": true` to L77 of config.json.in.
 
 ## Additional features
 ```
