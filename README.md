@@ -40,7 +40,7 @@ docker logout
 3. Use either of the following as endpoint:
    * `http://127.0.0.1:1234`
    * `ws://127.0.0.1:1233`
-4. Set `chainID=344435` (0x54173).
+4. Set `chainID=54173`.
 5. Use your wallet with the following test credentials:
 ```
   Seed phrase: kidney describe moon museum join brave birth detect harsh little hockey turn
