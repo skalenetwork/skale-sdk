@@ -67,6 +67,7 @@
       "basePort": 1231,
       "logLevel": "debug",
       "logLevelProposal": "trace",
+      "snapshotIntervalSec": 0,
       "rotateAfterBlock": 0,
       "ecdsaKeyName": ""
     },
