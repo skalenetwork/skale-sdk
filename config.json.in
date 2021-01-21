@@ -56,7 +56,8 @@
       },
       "nonce": "0"
     },
-    "0x6d80aAC61F6d92c7F4A3c412850474ba963B698E": {"balance": "100000000000000000000"}
+    "0x5112cE768917E907191557D7E9521c2590Cdd3A0": {"balance": "10000000000000000000000000"},
+    "0x6d80aAC61F6d92c7F4A3c412850474ba963B698E": {"balance": "10000000000000000000000000"}
   },
  "skaleConfig": {
     "nodeInfo": {
@@ -66,7 +67,7 @@
       "basePort": 1231,
       "logLevel": "debug",
       "logLevelProposal": "trace",
-      "snapshotInterval": 0,
+      "snapshotIntervalSec": 0,
       "rotateAfterBlock": 0,
       "ecdsaKeyName": ""
     },
@@ -75,6 +76,7 @@
         "schainName": "TestChain",
         "schainID": 1,
         "schainOwner": "0x6d80aAC61F6d92c7F4A3c412850474ba963B698E",
+        "freeContractDeployment": true,
         "storageLimit": 999888777,
         "emptyBlockIntervalMs": 3000,
         "nodes": [
