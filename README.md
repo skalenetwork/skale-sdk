@@ -1,4 +1,4 @@
-# SKALE Developer SDK
+# SKALE SDK
 
 This is a collection of tools for setting up local containerized single node environment for developing and testing Ethereum dApps on SKALE. It has been tested on both Mac and Ubuntu, and requires Docker. 
 
