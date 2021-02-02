@@ -13,7 +13,7 @@
 ###############################################################################
 
 _USE_DEBUG=0
-_SKALED_IMAGE="skalenetwork/schain:3.4.4-develop.0"
+_SKALED_IMAGE="skalenetwork/schain:3.4.7-develop.0"
 _DATA_DIR="./data_dir"
 
 ###############################################################################
