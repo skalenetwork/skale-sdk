@@ -1,0 +1,48 @@
+{
+    "name": "cat-cycle",
+    "version": "1.0.0",
+    "description": "Test app for high overloading S-Chain via multiple skaled nodes",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "SKALE",
+        "blockchain",
+        "block",
+        "chain",
+        "s-chain",
+        "pk",
+        "cat",
+        "cycle",
+        "load",
+        "heavy"
+    ],
+    "dependencies": {
+        "web3": "",
+        "colors": "1.3.3",
+        "ethereumjs-tx": "1.3.7",
+        "ethereumjs-wallet": "0.6.3",
+        "ethereumjs-util": "6.1.0",
+        "solc": "0.5.4"
+    },
+    "devDependencies": {
+        "eslint": "4.18.1",
+        "eslint-config-standard": "11.0.0",
+        "eslint-plugin-import": "2.9.0",
+        "eslint-plugin-markdown": "1.0.0-beta.6",
+        "eslint-plugin-node": "6.0.1",
+        "eslint-plugin-promise": "3.6.0",
+        "eslint-plugin-standard": "3.0.1",
+        "istanbul": "0.4.5"
+    },
+    "files": [
+        "LICENSE",
+        "README.md",
+        "cc.js",
+        "log.js",
+        "cat-cycle.js"
+    ],
+    "author": "Sergiy Lavrynenko",
+    "license": "MIT"
+}
