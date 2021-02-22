@@ -348,8 +348,8 @@ _main() {
 
   docker pull ${_SKALED_IMAGE}
 
-  docker stop skale_schain_skaled
-  docker rm skale_schain_skaled
+#  docker stop skale_schain_skaled
+#  docker rm skale_schain_skaled
   docker run --name skale_schain_skaled -v `pwd`/${_DATA_DIR}:/data_dir ${_args_arr} -e DATA_DIR=/data_dir --stop-timeout 40 -i -t ${_SKALED_IMAGE} ${_options} -d
 
 }
