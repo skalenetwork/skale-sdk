@@ -24,7 +24,7 @@ const CAT_SENDING_VALUE = 1;
 let g_bVerbose = false;
 
 let g_arrAllCats = JSON.parse(JSON.stringify(require("./all-cats.js").arrAllCats));
-let g_nCatsLimit = 3000; // 0xFFFFFFFFFFFF; // 150
+let g_nCatsLimit = 300; // 0xFFFFFFFFFFFF; // 150
 
 let g_ownerPrivateKey = "";
 let g_runIterations = 2000000000;
@@ -43,7 +43,7 @@ if (runArguments.length > 0) {
         // "ws://127.0.0.1:15001", "ws://127.0.0.2:15002", "ws://127.0.0.3:15003", "ws://127.0.0.4:15004"
 //        "http://127.0.0.1:15000"
 //        "http://35.180.12.13:1234"
-        "http://15.236.104.23:1234"
+        "http://15.236.104.23:1233"
         // "http://127.0.0.2:15100"
         // "http://127.0.0.1:15000" //, "http://127.0.0.2:15100"
         // "http://127.0.0.1:15000", "https://127.0.0.1:15010"

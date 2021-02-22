@@ -24,7 +24,7 @@ const CAT_SENDING_VALUE = 1;
 let g_bVerbose = false;
 
 let g_arrAllCats = JSON.parse(JSON.stringify(require("./all-cats.js").arrAllCats));
-let g_nCatsLimit = 500; // 0xFFFFFFFFFFFF; // 150
+let g_nCatsLimit = 300; // 0xFFFFFFFFFFFF; // 150
 
 let g_ownerPrivateKey = "";
 let g_runIterations = 2000000000;
