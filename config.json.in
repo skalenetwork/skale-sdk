@@ -43888,6 +43888,7 @@
         "freeContractDeployment": true,
         "storageLimit": 999888777,
         "emptyBlockIntervalMs": 3000,
+        "minBlockIntervalMs": 5000,
         "nodes": [
           { "nodeID": 1112, "ip": "127.0.0.1", "basePort": 1231, "schainIndex" : 1, "publicKey": "" }
         ]
