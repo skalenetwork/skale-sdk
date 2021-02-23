@@ -24,7 +24,7 @@ const CAT_SENDING_VALUE = 1;
 let g_bVerbose = false;
 
 let g_arrAllCats = JSON.parse(JSON.stringify(require("./all-cats.js").arrAllCats));
-let g_nCatsLimit = 300; // 0xFFFFFFFFFFFF; // 150
+let g_nCatsLimit = 1500; // 0xFFFFFFFFFFFF; // 150
 
 let g_ownerPrivateKey = "";
 let g_runIterations = 2000000000;
@@ -51,7 +51,11 @@ if (runArguments.length > 0) {
         // "ws://127.0.0.1:15020" //, "ws://127.0.0.2:15120"
         // "wss://127.0.0.1:15030"
 //        "ws://127.0.0.1:15020"
-        "http://35.180.128.200:1234"
+//        "ws://192.168.2.46:15020"
+//        "ws://35.180.119.99:15020"
+        "http://35.180.119.99:15002"
+//        "http://35.180.128.200:1234"
+//        "http://192.168.2.46:15000"
         //, "wss://127.0.0.1:15030"
         // "wss://for-christine-0.skalenodes.com:10018"
         // "ws://[::1]:15040"
