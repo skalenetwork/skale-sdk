@@ -22,7 +22,7 @@ do
 ## Turn off broadcast
 #	curl -X POST --data '{"jsonrpc":"2.0","method":"debug_pauseBroadcast","params":[true],"id":1}' $CUR_URL
 
-ssh -i ~/.ssh/ash_paris.pem -o "StrictHostKeyChecking no" ubuntu@$IP <<- ****
+ssh -i ~/.ssh/ash_sydney.pem -o "StrictHostKeyChecking no" ubuntu@$IP <<- ****
 pkill -f cat-cycle
 
 ****

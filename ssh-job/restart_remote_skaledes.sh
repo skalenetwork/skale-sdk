@@ -23,8 +23,8 @@ do
 #	curl -X POST --data '{"jsonrpc":"2.0","method":"debug_pauseBroadcast","params":[true],"id":1}' $CUR_URL
 CONT=skale-ci-$I-0
 echo $CONT
-ssh -i ~/.ssh/ash_paris.pem -o "StrictHostKeyChecking no" ubuntu@$IP <<- ****
-sudo docker restart $CONT
+ssh -i ~/.ssh/ash_sydney.pem -o "StrictHostKeyChecking no" ubuntu@$IP <<- ****
+sudo docker stop $CONT
 
 ****
 echo "Skaled restarted on $IP"

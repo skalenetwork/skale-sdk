@@ -22,9 +22,9 @@ do
 ## Turn off broadcast
 #	curl -X POST --data '{"jsonrpc":"2.0","method":"debug_pauseBroadcast","params":[true],"id":1}' $CUR_URL
 
-ssh -i ~/.ssh/ash_paris.pem -o "StrictHostKeyChecking no" ubuntu@$IP <<- ****
+ssh -i ~/.ssh/ash_sydney.pem -o "StrictHostKeyChecking no" ubuntu@$IP <<- ****
 cd 1node-cat-cycle
-nohup node cat-cycle.js &> output_cats.log &
+nohup node cat-cycle.js $I &> output_cats.log &
 ****
 echo "Cats started on $IP"
 
