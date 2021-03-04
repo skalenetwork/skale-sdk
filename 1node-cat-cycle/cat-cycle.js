@@ -25,19 +25,28 @@ const CAT_SENDING_VALUE = 1;
 let g_bVerbose = false;
 
 let g_arrAllCats = JSON.parse(JSON.stringify(require("./all-cats.js").arrAllCats));
-let g_nCatsLimit = 500; // 0xFFFFFFFFFFFF; // 150
+let g_nCatsLimit = 50; // 0xFFFFFFFFFFFF; // 150
 let g_isAwaitReceipt = true; // false; // true; // false; // true;
 let g_idxCatFirst = 0;
+
+let runArguments = process.argv.slice(2);
+if (runArguments.length > 0) {
+  console.log(process.argv[2])
+  g_idxCatFirst = process.argv[2] * 500;
+}
+
+console.log("Starting cats from:")
+console.log(g_idxCatFirst)
 
 let g_ownerPrivateKey = "";
 let g_runIterations = 2000000000;
 let g_runInterval = 1; // 5000
 
-let runArguments = process.argv.slice(2);
+//let runArguments = process.argv.slice(2);
 let g_arrNodeURLs = [];
 
 // provide non default endpoint
-if (runArguments.length > 0) {
+if (runArguments.length > 1000) {
     console.log("Use provided endpoint.")
     g_arrNodeURLs = [runArguments[0]];
 } else {
@@ -114,9 +123,9 @@ if (runArguments.length > 1) {
     }
 }
 
-if (runArguments.length > 2) {
-    g_runIterations = +runArguments[2];
-}
+//if (runArguments.length > 2) {
+//    g_runIterations = +runArguments[2];
+//}
 
 if (runArguments.length > 3) {
     g_runInterval = +runArguments[3];
